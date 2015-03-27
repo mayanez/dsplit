@@ -3,7 +3,7 @@
 # Modified  : Sun 26 Jul 2009 12:12:40 AM PDT
 # Author    : Gautam Iyer <gi1242@users.sourceforge.net>
 #
-# Split a directory into DVD sized directories. Source is left untouched, and
+# Split a directory into sized directories. Source is left untouched, and
 # hardlinks are created in the destination.
 
 import os
@@ -33,6 +33,8 @@ OPTIONS
     --for-dvd	Set volume size for DVD (4400MB)
     --for-dvd2	Set volume size for double layer DVD (8080MB)
     --for-cd	Set volume size for CD (680MB)
+    --for-bdr   Set volume size for BDR (23800MB)
+   
     -v		Verbose (print all subdirectories included in volumes)
     -V		Very verbose (print all files included too)"""
     sys.exit(0)
@@ -77,7 +79,7 @@ maxSize=4400 * MB
 cdsize=680*MB
 dvdsize=4400*MB
 dvd2size=8080*MB
-
+bdrsize=23800*MB
 
 try:
     (popts, argv) = getopt( argv[1:], 's:vVh',
@@ -94,6 +96,8 @@ for (opt, value) in popts:
 	maxSize = dvdsize
     elif opt == '--for-dvd2':
 	maxSize = dvd2size
+    elif opt == '--for-bdr':
+        maxSize = bdrsize
     elif opt == '-v':
 	verbose=True
     elif opt == '-V':
